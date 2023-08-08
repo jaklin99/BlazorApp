@@ -1,0 +1,55 @@
+﻿@page "/"
+@using BlazorApp.Data
+@inject IpcService IpcService
+
+@if (IPCs == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+<table class="table table-striped">
+    <thead>
+    <tr>
+            <th>IPC</th>
+            <th>Data Factory</th>
+            <th>Time</th>
+            <th>AvgValue</th>
+            <th>MinValue</th>
+            <th>MaxValue</th>
+            <th>MetricId</th>
+            <th>CpuMHz</th>
+    </tr>
+        </thead>
+        <tbody>
+            @foreach (var ipc in IPCs)
+            {
+                <tr>
+                    <td>@ipc.Ipc</td>
+                    <td>@ipc.DataFactory</td>
+                    <td>@ipc.Date</td>
+                    <td>@ipc.AvgValue</td>
+                    <td>@ipc.MinValue</td>
+                    <td>@ipc.MaxValue</td>
+                    <td>@ipc.MetricId</td>
+                    <td>@ipc.CpuMHz</td>
+                </tr>
+            }
+        </tbody>
+</table>
+}
+
+@code{
+    public List<IPC> IPCs = new List<IPC>();
+    private List<IPC> ReadExcel()
+    {
+        IPCs = IpcService.GetIPCs();
+        return IPCs;
+    }
+
+    protected override void OnInitialized()
+    {
+        ReadExcel();
+        Console.WriteLine(ReadExcel());
+    }
+}
