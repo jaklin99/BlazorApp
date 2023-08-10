@@ -24,6 +24,26 @@ else
         <tbody>
             @foreach (var ipc in IPCs)
             {
+
+@*                    <button class="btn btn-primary" @onclick="CalculateLowestPerformance">Calculate Lowest Performance</button>
+*@
+
+                @code {
+            private IPC performanceData = new IPC();
+            private double? lowestPerformance;
+
+            private void CalculateLowestPerformance()
+            {
+                lowestPerformance = Math.Min(performanceData.AvgValue, Math.Min(performanceData.MinValue, Math.Min(performanceData.MaxValue, performanceData.CpuMHz)));
+            }
+        }
+                @if (lowestPerformance.HasValue)
+                {
+                                        this.CalculateLowestPerformance();
+                    <p>Lowest Performance: @lowestPerformance</p>
+
+                }
+                @*
                 <tr>
                     <td>@ipc.Ipc</td>
                     <td>@ipc.DataFactory</td>
@@ -33,11 +53,12 @@ else
                     <td>@ipc.MaxValue</td>
                     <td>@ipc.MetricId</td>
                     <td>@ipc.CpuMHz</td>
-                </tr>
+                </tr>*@
             }
         </tbody>
 </table>
 }
+
 
 @code{
     public List<IPC> IPCs = new List<IPC>();

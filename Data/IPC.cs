@@ -6,12 +6,12 @@
 
         public int DataFactory { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
 
-        public float AvgValue { get; set; }
+        public double AvgValue { get; set; }
 
-        public float MinValue { get; set; }
-        public float MaxValue { get; set; }
+        public double MinValue { get; set; }
+        public double MaxValue { get; set; }
         public string? MetricId { get; set; }
         public int CpuMHz { get; set; }
 

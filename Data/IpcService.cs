@@ -28,8 +28,10 @@ namespace BlazorApp.Data
                         string? row_col = worksheet.Cells[row, col].Value.ToString();
                         if (col == 1) ipc.Ipc = worksheet.Cells[row, col].Value.ToString();
                         if (col == 2) ipc.DataFactory = int.TryParse(row_col, out int result) ? result : 0;
-                        //if (col == 3) ipc.Date = int.TryParse(row_col, out int result) ? result : 0;
-                        if (col == 4) ipc.AvgValue = int.TryParse(row_col, out int result) ? result : 0;
+                        //if (col == 3) ipc.Date = worksheet.Cells[row, col].Value.ToString("dd. MM. yyyy");
+
+                        int rounded = (int)Math.Round(ipc.AvgValue, 0);
+                        if (col == 4) rounded = int.TryParse(row_col, out int result) ? result : 0;
                         if (col == 5) ipc.MinValue = int.TryParse(row_col, out int result) ? result : 0;
                         if (col == 6) ipc.MaxValue = int.TryParse(row_col, out int result) ? result : 0;
                         if (col == 7) ipc.MetricId = worksheet.Cells[row, col].Value.ToString();

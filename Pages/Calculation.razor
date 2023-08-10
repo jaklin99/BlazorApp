@@ -1,0 +1,44 @@
+﻿@page "/lowest-performance"
+@using BlazorApp.Data
+
+<h3>Calculate Lowest Performance</h3>
+
+<EditForm Model="performanceData">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="averageValue">Average Value</label>
+        <InputNumber id="averageValue" class="form-control" @bind-Value="performanceData.AvgValue" />
+    </div>
+    <div class="form-group">
+        <label for="minValue">Minimum Value</label>
+        <InputNumber id="minValue" class="form-control" @bind-Value="performanceData.MinValue" />
+    </div>
+    <div class="form-group">
+        <label for="maxValue">Maximum Value</label>
+        <InputNumber id="maxValue" class="form-control" @bind-Value="performanceData.MaxValue" />
+    </div>
+    <div class="form-group">
+        <label for="cpuMHz">CPU MHz</label>
+        <InputNumber id="cpuMHz" class="form-control" @bind-Value="performanceData.CpuMHz" />
+    </div>
+
+@*    <button class="btn btn-primary" @onclick="CalculateLowestPerformance">Calculate Lowest Performance</button>
+*@
+</EditForm>
+
+@if (lowestPerformance.HasValue)
+{
+    <p>Lowest Performance: @lowestPerformance</p>
+    lowestPerformance = Math.Min(performanceData.AvgValue, Math.Min(performanceData.MinValue, Math.Min(performanceData.MaxValue, performanceData.CpuMHz)));
+}
+
+@code {
+    private IPC performanceData = new IPC();
+    private double? lowestPerformance;
+
+    //private void CalculateLowestPerformance()
+    //{
+    //    lowestPerformance = Math.Min(performanceData.AvgValue, Math.Min(performanceData.MinValue, Math.Min(performanceData.MaxValue, performanceData.CpuMHz)));
+    //}
+}
