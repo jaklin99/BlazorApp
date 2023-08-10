@@ -17,16 +17,6 @@ namespace BlazorApp.Data
         public double MaxValue { get; set; }
         public string? MetricId { get; set; }
         public int CpuMHz { get; set; }
-        public int LowestPerformance
-        {
-            get
-            {
-                return LowestPerformance;
-            }
-            set
-            { 
-                this.lowestPerformance = Math.Min(AvgValue, Math.Min(MinValue, Math.Min(MaxValue, CpuMHz)));
-            }
-        }
+        public int LowestPerformance { get; set; }
     } 
 }

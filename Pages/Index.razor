@@ -12,30 +12,38 @@ else
     <thead>
     <tr>
             <th>IPC</th>
-            <th>Data Factory</th>
+           @* <th>Data Factory</th>
             <th>Time</th>
             <th>AvgValue</th>
             <th>MinValue</th>
             <th>MaxValue</th>
             <th>MetricId</th>
-            <th>CpuMHz</th>
+            <th>CpuMHz</th>*@
             <th>Lowest performance</th>
     </tr>
         </thead>
         <tbody>
-
-            @foreach (var ipc in IPCs.OrderBy(pc => pc.LowestPerformance))
+@*            sorting the data accoring to the lowest performance of IPCs
+*@            
+           @foreach (var ipc in IPCs.OrderBy(pc => pc.LowestPerformance))
             {
+                @*calculating the lowest performance by taking into account the values provided in the excel file*@
+                lowestPerformance = Math.Min(@ipc.AvgValue, Math.Min(@ipc.MinValue, Math.Min(@ipc.MaxValue, @ipc.CpuMHz)));
+
                 <tr>
                     <td>@ipc.Ipc</td>
+                    @*
                     <td>@ipc.DataFactory</td>
                     <td>@ipc.Date</td>
                     <td>@ipc.AvgValue</td>
                     <td>@ipc.MinValue</td>
                     <td>@ipc.MaxValue</td>
                     <td>@ipc.MetricId</td>
-                    <td>@ipc.CpuMHz</td>
-                    <td>@ipc.LowestPerformance</td>
+                    <td>@ipc.CpuMHz</td>*@
+
+@*                    TODO: set the lowest performance and display it
+*@   
+                    <td>lowestPerformance</td>
                 </tr>
             }
         </tbody>
@@ -44,6 +52,7 @@ else
 
 @code{
     public List<IPC> IPCs = new List<IPC>();
+
     private List<IPC> ReadExcel()
     {
         IPCs = IpcService.GetIPCs();
@@ -55,6 +64,7 @@ else
         ReadExcel();
         Console.WriteLine(ReadExcel());
     }
+
     private double? lowestPerformance;
 
 }
