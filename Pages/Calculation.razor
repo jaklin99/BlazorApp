@@ -37,8 +37,8 @@
     private IPC performanceData = new IPC();
     private double? lowestPerformance;
 
-    //private void CalculateLowestPerformance()
-    //{
-    //    lowestPerformance = Math.Min(performanceData.AvgValue, Math.Min(performanceData.MinValue, Math.Min(performanceData.MaxValue, performanceData.CpuMHz)));
-    //}
+    private void CalculateLowestPerformance()
+    {
+        lowestPerformance = Math.Min(performanceData.AvgValue, Math.Min(performanceData.MinValue, Math.Min(performanceData.MaxValue, performanceData.CpuMHz)));
+    }
 }
