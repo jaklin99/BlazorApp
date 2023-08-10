@@ -24,9 +24,8 @@ else
         </thead>
         <tbody>
 
-            @foreach (var ipc in IPCs)
+            @foreach (var ipc in IPCs.OrderBy(pc => pc.LowestPerformance))
             {
-                lowestPerformance = Math.Min(@ipc.AvgValue, Math.Min(@ipc.MinValue, Math.Min(@ipc.MaxValue, @ipc.CpuMHz)));
                 <tr>
                     <td>@ipc.Ipc</td>
                     <td>@ipc.DataFactory</td>
@@ -36,7 +35,7 @@ else
                     <td>@ipc.MaxValue</td>
                     <td>@ipc.MetricId</td>
                     <td>@ipc.CpuMHz</td>
-                    <td>@lowestPerformance</td>
+                    <td>@ipc.LowestPerformance</td>
                 </tr>
             }
         </tbody>
@@ -56,6 +55,6 @@ else
         ReadExcel();
         Console.WriteLine(ReadExcel());
     }
-private double? lowestPerformance;
+    private double? lowestPerformance;
 
 }
