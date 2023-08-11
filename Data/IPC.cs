@@ -18,5 +18,9 @@ namespace BlazorApp.Data
         public string? MetricId { get; set; }
         public int CpuMHz { get; set; }
         public int LowestPerformance { get; set; }
+        public void SetLowestPerformance(int lowestPerformance)
+        {
+            LowestPerformance = lowestPerformance;
+        }
     } 
 }

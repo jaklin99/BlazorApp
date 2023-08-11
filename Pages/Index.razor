@@ -28,6 +28,7 @@ else
            @foreach (var ipc in IPCs.OrderBy(pc => pc.LowestPerformance))
             {
                 @*calculating the lowest performance by taking into account the values provided in the excel file*@
+                @ipc.LowestPerformance;
                 lowestPerformance = Math.Min(@ipc.AvgValue, Math.Min(@ipc.MinValue, Math.Min(@ipc.MaxValue, @ipc.CpuMHz)));
 
                 <tr>
@@ -43,7 +44,7 @@ else
 
 @*                    TODO: set the lowest performance and display it
 *@   
-                    <td>lowestPerformance</td>
+                    <td>@ipc.LowestPerformance</td>
                 </tr>
             }
         </tbody>
@@ -65,6 +66,12 @@ else
         Console.WriteLine(ReadExcel());
     }
 
-    private double? lowestPerformance;
+    private int? lowestPerformance;
+
+
+    [Inject]
+    private IpcService ipcService { get; set; }
+
+    private void SetVariable() => ipcService.SetLowestPerformance(lowestPerformance);
 
 }
