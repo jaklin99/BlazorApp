@@ -4,7 +4,6 @@ namespace BlazorApp.Data
 {
     public class IPC
     {
-        private double? lowestPerformance;
         public string? Ipc { get; set; }
 
         public int DataFactory { get; set; }
@@ -17,8 +16,8 @@ namespace BlazorApp.Data
         public double MaxValue { get; set; }
         public string? MetricId { get; set; }
         public int CpuMHz { get; set; }
-        public int LowestPerformance { get; set; }
-        public void SetLowestPerformance(int lowestPerformance)
+        public double LowestPerformance;
+        public void SetLowestPerformance(double lowestPerformance)
         {
             LowestPerformance = lowestPerformance;
         }

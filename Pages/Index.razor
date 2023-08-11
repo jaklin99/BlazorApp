@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using BlazorApp.Data
 @inject IpcService IpcService
+@inject IPC ipcClass
+
 
 @if (IPCs == null)
 {
@@ -28,9 +30,8 @@ else
            @foreach (var ipc in IPCs.OrderBy(pc => pc.LowestPerformance))
             {
                 @*calculating the lowest performance by taking into account the values provided in the excel file*@
-                @ipc.LowestPerformance;
                 lowestPerformance = Math.Min(@ipc.AvgValue, Math.Min(@ipc.MinValue, Math.Min(@ipc.MaxValue, @ipc.CpuMHz)));
-
+                CallSetLowestPerformance();
                 <tr>
                     <td>@ipc.Ipc</td>
                     @*
@@ -42,8 +43,7 @@ else
                     <td>@ipc.MetricId</td>
                     <td>@ipc.CpuMHz</td>*@
 
-@*                    TODO: set the lowest performance and display it
-*@   
+                @*TODO: set the lowest performance and display it*@   
                     <td>@ipc.LowestPerformance</td>
                 </tr>
             }
@@ -66,12 +66,11 @@ else
         Console.WriteLine(ReadExcel());
     }
 
-    private int? lowestPerformance;
+    private double lowestPerformance;
 
 
-    [Inject]
-    private IpcService ipcService { get; set; }
+    private IPC ipc { get; set; }
 
-    private void SetVariable() => ipcService.SetLowestPerformance(lowestPerformance);
+    private void CallSetLowestPerformance() => ipc.SetLowestPerformance(lowestPerformance);
 
 }
