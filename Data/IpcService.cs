@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using OfficeOpenXml.Drawing.Controls;
 using System.Drawing.Text;
 
 namespace BlazorApp.Data
@@ -8,6 +9,7 @@ namespace BlazorApp.Data
         //Read an excel file
         public List<IPC> GetIPCs()
         {
+            //reading data from the file
             List<IPC> IPCs = new List<IPC>();
             string filePath = "C://Users//Zhaklin//Desktop//itility assignment//testcase_smart_applicator_V8.2_020823.xlsx";
 
@@ -28,7 +30,7 @@ namespace BlazorApp.Data
                         string? row_col = worksheet.Cells[row, col].Value.ToString();
                         if (col == 1) ipc.Ipc = worksheet.Cells[row, col].Value.ToString();
                         if (col == 2) ipc.DataFactory = int.TryParse(row_col, out int result) ? result : 0;
-                        //TODO: fix the date type
+                        //TODO: fix the date type error
                         //if (col == 3) ipc.Date = worksheet.Cells[row, col].Value.ToString("dd. MM. yyyy");
                         int rounded = (int)Math.Round(ipc.AvgValue, 0);
                         if (col == 4) rounded = int.TryParse(row_col, out int result) ? result : 0;

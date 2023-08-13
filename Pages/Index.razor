@@ -14,19 +14,11 @@ else
     <thead>
     <tr>
             <th>IPC</th>
-           @* <th>Data Factory</th>
-            <th>Time</th>
-            <th>AvgValue</th>
-            <th>MinValue</th>
-            <th>MaxValue</th>
-            <th>MetricId</th>
-            <th>CpuMHz</th>*@
             <th>Lowest performance</th>
     </tr>
         </thead>
         <tbody>
-@*            sorting the data accoring to the lowest performance of IPCs
-*@            
+           @*sorting the data accoring to the lowest performance of IPCs*@            
            @foreach (var ipc in IPCs.OrderBy(pc => pc.LowestPerformance))
             {
                 @*calculating the lowest performance by taking into account the values provided in the excel file*@
@@ -34,15 +26,6 @@ else
                 CallSetLowestPerformance();
                 <tr>
                     <td>@ipc.Ipc</td>
-                    @*
-                    <td>@ipc.DataFactory</td>
-                    <td>@ipc.Date</td>
-                    <td>@ipc.AvgValue</td>
-                    <td>@ipc.MinValue</td>
-                    <td>@ipc.MaxValue</td>
-                    <td>@ipc.MetricId</td>
-                    <td>@ipc.CpuMHz</td>*@
-
                 @*TODO: set the lowest performance and display it*@   
                     <td>@ipc.LowestPerformance</td>
                 </tr>
